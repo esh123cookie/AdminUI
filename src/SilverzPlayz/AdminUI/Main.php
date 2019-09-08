@@ -297,7 +297,6 @@ break;
                 }
             });
             $form->setTitle("§b§lTeleport Yourself");
-$form->setContent("Teleport yourself to another player");
             $form->addInput("Teleport yourself to", "SilverzPlayz");
             $form->sendToPlayer($sender);
             return true;
@@ -325,7 +324,6 @@ break;
                 }
             });
             $form->setTitle("§b§lTeleport Players");
-$form->setContent("Teleport Player1 to Player2");
             $form->addInput("Player1", "SilverzPlayz");
  $form->addInput("Player2", "SilverzPlayz");
             $form->sendToPlayer($sender);
