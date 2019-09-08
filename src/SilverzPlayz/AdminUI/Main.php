@@ -6,6 +6,7 @@ namespace SilverzPlayz\AdminUI;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\Player;
+use pocketmine\Server;
 use jojoe77777\FormAPI\SimpleForm;
 use jojoe77777\FormAPI\CustomForm;
 use pocketmine\command\{Command,CommandSender};
@@ -66,6 +67,14 @@ $this->KickPage($player);
 
                 break;
                 case 3: 
+$this->TeleportPage($player);
+
+                break;
+                case 4: 
+$this->BroadcastPage($player);
+
+                break;
+                case 5: 
 $this->InfoPage($player);
 
                 break;
@@ -78,6 +87,8 @@ $this->InfoPage($player);
          $form->addButton("§3Ban\n§7Ban a player");
 $form->addButton("§3Unban\n§7Unban a player");
          $form->addButton("§3Kick\n§7Kick a player");
+$form->addButton("§3Teleport\n§7Wanna teleport?");
+$form->addButton("§3Broadcast\n§7Broadcast Message");
 $form->addButton("§b§lInformation");
         $form->addButton("§8Close");
         $form->sendToPlayer($player);
@@ -198,6 +209,128 @@ break;
             return true;
     }
 
+
+public function BroadcastPage(CommandSender $sender):bool{
+        if(!($sender instanceof Player)){
+                $sender->sendMessage("Broadcast a message", false);
+                return true;
+            }
+            $form = new CustomForm(function (Player $player, $data){
+                $result = $data[0];
+                if ($result == null) {
+                }
+                switch ($result) {
+                    case 0:
+		
+
+
+                $this->getServer()->broadcastMessage($result);
+
+    
+break;
+                }
+            });
+            $form->setTitle("§b§lBroadcast");
+            $form->addInput("Watcha wanna send to everyone?", "Who is my friend???");
+            $form->sendToPlayer($sender);
+            return true;
+    }
+
+
+
+
+
+
+
+public function TeleportPage(Player $player) {
+    
+    	
+        $form = new SimpleForm(function (Player $player, $data){
+            if ($data === null) {
+                return;
+            }
+            switch ($data) {
+            	   case 0: 
+$this->Method1Page($player);
+
+                break;
+
+            	   case 1: 
+$this->Method2Page($player);
+
+                break;
+
+
+                    
+            }
+            }
+        );
+        $form->setTitle("§b§lTelepprt");
+         $form->setContent("Select a method");
+         $form->addButton("§3Teleport\nYourself To");
+$form->addButton("§3Teleport\nPlayer To");
+        $form->addButton("§8Close");
+        $form->sendToPlayer($player);
+    }
+    
+
+
+
+public function Method1Page(CommandSender $sender):bool{
+        if(!($sender instanceof Player)){
+                $sender->sendMessage("TP", false);
+                return true;
+            }
+            $form = new CustomForm(function (Player $player, $data){
+                $result = $data[0];
+                if ($result == null) {
+                }
+                switch ($result) {
+                    case 0:
+		
+$this->getServer()->getCommandMap()->dispatch($player, $cmd = "teleport $result");
+        $this->runAsOp($player, $cmd);
+                
+
+    
+break;
+                }
+            });
+            $form->setTitle("§b§lTeleport Yourself");
+$form->setContent("Teleport yourself to another player")
+            $form->addInput("Teleport yourself to", "SilverzPlayz");
+            $form->sendToPlayer($sender);
+            return true;
+    }
+
+
+public function Method2Page(CommandSender $sender):bool{
+        if(!($sender instanceof Player)){
+                $sender->sendMessage("TP", false);
+                return true;
+            }
+            $form = new CustomForm(function (Player $player, $data){
+                $result = $data[0];
+                if ($result == null) {
+                }
+                switch ($result) {
+                    case 0:
+		
+$this->getServer()->getCommandMap()->dispatch($player, $cmd = "teleport $result" . " $result");
+        $this->runAsOp($player, $cmd);
+                
+
+    
+break;
+                }
+            });
+            $form->setTitle("§b§lTeleport Players");
+$form->setContent("Teleport Player1 to Player2");
+            $form->addInput("Player1", "SilverzPlayz");
+ $form->addInput("Player2", "SilverzPlayz");
+            $form->sendToPlayer($sender);
+            return true;
+    }
 
 }
 	    
