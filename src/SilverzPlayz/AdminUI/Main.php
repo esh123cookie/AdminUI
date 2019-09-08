@@ -70,8 +70,11 @@ $this->KickPage($player);
 $this->TeleportPage($player);
 
                 break;
-                
                 case 4: 
+$this->BroadcastPage($player);
+
+                break;
+                case 5: 
 $this->InfoPage($player);
 
                 break;
@@ -85,6 +88,7 @@ $this->InfoPage($player);
 $form->addButton("§3Unban\n§7Unban a player");
          $form->addButton("§3Kick\n§7Kick a player");
 $form->addButton("§3Teleport\n§7Wanna teleport?");
+$form->addButton("§3Broadcast\nMessage");
 $form->addButton("§b§lInformation");
         $form->addButton("§8Close");
         $form->sendToPlayer($player);
@@ -204,6 +208,34 @@ break;
             $form->sendToPlayer($sender);
             return true;
     }
+
+
+public function BroadcastPage(CommandSender $sender):bool{
+        if(!($sender instanceof Player)){
+                $sender->sendMessage("Broadcast a message", false);
+                return true;
+            }
+            $form = new CustomForm(function (Player $player, $data){
+                $result = $data[0];
+                if ($result == null) {
+                }
+                switch ($result) {
+                    case 0:
+		
+
+
+                $this->getServer()->broadcastMessage($result);
+
+    
+break;
+                }
+            });
+            $form->setTitle("§b§lBroadcast");
+            $form->addInput("Watcha wanna send to everyone?", "Who is my friend???");
+            $form->sendToPlayer($sender);
+            return true;
+    }
+
 
 
 
