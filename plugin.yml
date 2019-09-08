@@ -1,6 +1,6 @@
 name: AdminUI
 main: SilverzPlayz\AdminUI\Main
-version: 1.0.0
+version: 1.0.1
 api: 3.6.0
 author: SilverzPlayz
 commands:
